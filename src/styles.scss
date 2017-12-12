@@ -1,7 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
 
+// declaração de variáveis
 $sexlog-purple: #691979;
 
+// declaração de media queries
+@mixin phone {
+	@media (min-width: #{$phone-width}) and (max-width: #{$tablet-portrait - 1px}) {
+		@content;
+	}
+}
+
+@mixin tablet-portrait {
+    @media (min-width: #{$tablet-portrait}) and (max-width: #{$tablet-landscape - 1px}) and (orientation : portrait) {
+        @content;
+    }
+}
+
+@mixin tablet-landscape {
+    @media (min-width: #{$tablet-portrait}) and (max-width: #{$tablet-landscape - 1px}) and (orientation : landscape) {
+        @content;
+    }
+}
+
+@mixin laptop {
+    @media (max-width: #{$laptop-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop-1366 {
+    @media (max-width: #{$desktop-1366-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop-1440 {
+    @media (max-width: #{$desktop-1440-width - 1px}) {
+        @content;
+    }
+}
+
+// classes genéricas
 .main-color {
     color: $sexlog-purple;
 }
@@ -23,6 +62,7 @@ $sexlog-purple: #691979;
     vertical-align: middle;
 }
 
+// estilização dentro do body
 body {
     background-color: #292929;
     font-family: Signika Negative;
@@ -44,6 +84,7 @@ body {
             left: calc(50% - 450px);
             border-radius: 5px;
             margin: 0;
+            overflow: hidden;
 
             .modal-header {
                 position: relative;
@@ -62,7 +103,7 @@ body {
                     top: 0;
                     right: 0;
                     padding: 0 25px;
-                    border-left: 1px solid #ccc;
+                    border-left: 1px solid #E0E0E0;
                     height: 100%;
 
                     i {
@@ -76,16 +117,17 @@ body {
             }
             .modal-content {
                 background-color: #F5F5F5;
+                height: 350px;
 
                 .plano-flow {
-                    border-top: 1px solid #ccc;
-                    border-bottom: 1px solid #ccc;
+                    border-top: 1px solid #E0E0E0;
+                    border-bottom: 1px solid #E0E0E0;
 
                     p {
                         float: left;
                         width: 50%;
                         margin: 0;
-                        padding: 10px 0;
+                        padding: 18px 0;
                         text-align: center;
                         color: #9C9C9C;
 
@@ -100,42 +142,85 @@ body {
                     float: left;
                     width: 50%;
                     text-align: center;
+                    height: 295px;
 
-                    .valor-container {
-                        padding: 50px 0;
+                    .inner-wrapper {
+                        display: inline-block;
+                        vertical-align: middle;
 
-                        .real-symbol {
+                        .valor-container {
+                            padding: 50px 0;
 
+                            .real-symbol {
+
+                            }
+                            .valor-number {
+                                display: inline-block;
+                                font-weight: 900;
+                                font-size: 65px;
+                                vertical-align: super;
+                                font-family: Arial;
+                                margin: 0;
+                                line-height: 45px;
+
+                                .moeda {
+                                    line-height: 15px;
+                                    vertical-align: top;
+                                    font-size: 15px;
+                                }
+                            }
                         }
-                        .valor-number {
-                            display: inline-block;
-                            font-weight: 900;
-                            font-size: 65px;
-                            vertical-align: super;
-                            font-family: Arial;
-                            margin: 0;
-                            line-height: 45px;
+                        .pagamento-detalhes {
+                            .pagamento-tipo {
+                                margin: 10px 0;
 
-                            .moeda {
-                                line-height: 15px;
-                                vertical-align: top;
-                                font-size: 15px;
+                                img {
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                    margin: 0 5px;
+                                }
+                                p {
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                    margin: 0;
+                                }
                             }
                         }
                     }
-                    .pagamento-detalhes {
-                        .pagamento-tipo {
-                            margin: 10px 0;
+                }
+                .plano-opcoes {
+                    float: left;
+                    width: 50%;
+                    height: 295px;
 
-                            img {
-                                display: inline-block;
-                                vertical-align: middle;
-                                margin: 0 5px;
+                    .inner-wrapper {
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 92%;
+
+                        .opcao-box {
+                            background-color: #fff;
+                            width: 100%;
+                            max-width: calc(100% - 55px);
+                            border-radius: 8px;
+                            padding: 22px 20px;
+                            margin-left: 10px;
+                            color: $sexlog-purple;
+                            border: 1px solid #C4C4C4;
+                            font-family: Arial;
+                            font-weight: 700;
+
+                            &:not(:last-of-type) {
+                                margin-bottom: 5px;
                             }
-                            p {
-                                display: inline-block;
-                                vertical-align: middle;
-                                margin: 0;
+                            &:hover {
+                                cursor: pointer;
+                            }
+                            &.active {
+                                background-color: $sexlog-purple;
+                                color: #fff;
+                                border-color: $sexlog-purple;
+                                cursor: default;
                             }
                         }
                     }
@@ -143,6 +228,9 @@ body {
             }
             .modal-footer {
                 background-color: #F5F5F5;
+                height: 80px;
+                width: 100%;
+                border-top: 1px solid #E0E0E0;
             }
         }
     }
