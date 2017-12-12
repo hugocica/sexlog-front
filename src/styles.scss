@@ -1,1 +1,149 @@
 /* You can add global styles to this file, and also import other style files */
+
+$sexlog-purple: #691979;
+
+.main-color {
+    color: $sexlog-purple;
+}
+
+.clearfix {
+    &:before, &:after {
+        content: " ";
+        display: block;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.vertical-helper {
+    width: 0;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+body {
+    background-color: #292929;
+    font-family: Signika Negative;
+    position: relative;
+    overflow: hidden;
+
+    .wrapper {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        display: inline-block;
+
+        .modal {
+            background-color: #fff;
+            width: 900px;
+            height: 485px;
+            position: absolute;
+            top: calc(50% - 242.5px);
+            left: calc(50% - 450px);
+            border-radius: 5px;
+            margin: 0;
+
+            .modal-header {
+                position: relative;
+                padding: 15px 0;
+                height: 25px;
+
+                p {
+                    text-align: center;
+                    font-weight: 700;
+                    font-size: 20px;
+                    margin: 0;
+                }
+                .close-btn {
+                    color: #626262;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    padding: 0 25px;
+                    border-left: 1px solid #ccc;
+                    height: 100%;
+
+                    i {
+                        max-width: 90%;
+                        display: inline-block;
+                        vertical-align: middle;
+                        font-weight: 700;
+                        font-size: 14px;
+                    }
+                }
+            }
+            .modal-content {
+                background-color: #F5F5F5;
+
+                .plano-flow {
+                    border-top: 1px solid #ccc;
+                    border-bottom: 1px solid #ccc;
+
+                    p {
+                        float: left;
+                        width: 50%;
+                        margin: 0;
+                        padding: 10px 0;
+                        text-align: center;
+                        color: #9C9C9C;
+
+                        &.active {
+                            color: $sexlog-purple;
+                            background-color: #fff;
+
+                        }
+                    }
+                }
+                .plano-info {
+                    float: left;
+                    width: 50%;
+                    text-align: center;
+
+                    .valor-container {
+                        padding: 50px 0;
+
+                        .real-symbol {
+
+                        }
+                        .valor-number {
+                            display: inline-block;
+                            font-weight: 900;
+                            font-size: 65px;
+                            vertical-align: super;
+                            font-family: Arial;
+                            margin: 0;
+                            line-height: 45px;
+
+                            .moeda {
+                                line-height: 15px;
+                                vertical-align: top;
+                                font-size: 15px;
+                            }
+                        }
+                    }
+                    .pagamento-detalhes {
+                        .pagamento-tipo {
+                            margin: 10px 0;
+
+                            img {
+                                display: inline-block;
+                                vertical-align: middle;
+                                margin: 0 5px;
+                            }
+                            p {
+                                display: inline-block;
+                                vertical-align: middle;
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+            .modal-footer {
+                background-color: #F5F5F5;
+            }
+        }
+    }
+}
