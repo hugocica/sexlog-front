@@ -2,6 +2,9 @@
 
 // declaração de variáveis
 $sexlog-purple: #691979;
+$sexlog-green: #49CBA4;
+// $main-fontfamily: Signika Negative;
+$main-fontfamily: Source Sans Pro;
 
 // declaração de media queries
 @mixin phone {
@@ -40,6 +43,12 @@ $sexlog-purple: #691979;
     }
 }
 
+%bfaf {
+	content: "";
+	position: absolute;
+	display: block;
+}
+
 // classes genéricas
 .main-color {
     color: $sexlog-purple;
@@ -65,7 +74,7 @@ $sexlog-purple: #691979;
 // estilização dentro do body
 body {
     background-color: #292929;
-    font-family: Signika Negative;
+    font-family: $main-fontfamily;
     position: relative;
     overflow: hidden;
 
@@ -130,12 +139,28 @@ body {
                         padding: 18px 0;
                         text-align: center;
                         color: #9C9C9C;
+						position: relative;
+						background-color: #E9E9E9;
 
                         &.active {
                             color: $sexlog-purple;
                             background-color: #fff;
 
                         }
+                        &:first-of-type {
+							&:after {
+	                            @extend %bfaf;
+								background-color: transparent;
+								top: 0;
+								right: -20px;
+								width: 0;
+								height: 0;
+								border-top: 28px solid transparent;
+								border-bottom: 28px solid transparent;
+								border-left: 20px solid #fff;
+								z-index: 1;
+	                        }
+						}
                     }
                 }
                 .plano-info {
@@ -156,17 +181,17 @@ body {
                             }
                             .valor-number {
                                 display: inline-block;
-                                font-weight: 900;
-                                font-size: 65px;
+                                font-weight: 700;
+                                font-size: 100px;
                                 vertical-align: super;
-                                font-family: Arial;
+                                font-family: $main-fontfamily;
                                 margin: 0;
                                 line-height: 45px;
 
                                 .moeda {
                                     line-height: 15px;
                                     vertical-align: top;
-                                    font-size: 15px;
+                                    font-size: 35px;
                                 }
                             }
                         }
@@ -207,8 +232,9 @@ body {
                             margin-left: 10px;
                             color: $sexlog-purple;
                             border: 1px solid #C4C4C4;
-                            font-family: Arial;
+                            font-family: $main-fontfamily;
                             font-weight: 700;
+							position: relative;
 
                             &:not(:last-of-type) {
                                 margin-bottom: 5px;
@@ -221,6 +247,18 @@ body {
                                 color: #fff;
                                 border-color: $sexlog-purple;
                                 cursor: default;
+
+								&:after {
+		                            @extend %bfaf;
+									background-color: transparent;
+									top: calc(50% - 24px);
+									left: -10px;
+									width: 0;
+									height: 0;
+									border-top: 24px solid transparent;
+									border-bottom: 24px solid transparent;
+									border-right: 17px solid #691979;
+		                        }
                             }
                         }
                     }
@@ -231,6 +269,49 @@ body {
                 height: 80px;
                 width: 100%;
                 border-top: 1px solid #E0E0E0;
+
+				.ssl-symbol {
+					float: left;
+					width: 50%;
+					height: 100%;
+
+					.inner-wrapper {
+						display: inline-block;
+						vertical-align: middle;
+						width: 99%;
+					}
+				}
+				.btn-container {
+					float: left;
+					width: 50%;
+					height: 100%;
+
+					.inner-wrapper {
+						display: inline-block;
+						vertical-align: middle;
+						width: 99%;
+
+						.main-btn {
+							font-family: $main-fontfamily;
+							font-size: 18px;
+							font-weight: 700;
+							box-shadow: none;
+							width: 100%;
+							text-align: center;
+							max-width: 410px;
+							padding: 13px 0;
+							border-radius: 6px;
+							outline: none;
+							border: 2px solid;
+
+							&.green-btn {
+								background-color: $sexlog-green;
+								color: #fff;
+								border-color: #32B48D;
+							}
+						}
+					}
+				}
             }
         }
     }
