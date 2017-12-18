@@ -111,4 +111,15 @@ export class AppComponent {
             this.$('#payment-end').slideDown();
         }
     }
+
+    validateForm(event: any) {
+        console.log(<HTMLInputElement>event.target);
+        // if ( (<HTMLInputElement>event.target).className == 'opcao-box' ) {
+        //     (<HTMLInputElement>event.target).className += " active";
+        // } else if ( (<HTMLInputElement>event.target).className == 'percetage' ) {
+        //     (<HTMLInputElement>event.target.parentElement.parentElement).className += " active";
+        // } else {
+        //     (<HTMLInputElement>event.target.parentElement).className += " active";
+        // }
+    }
 }

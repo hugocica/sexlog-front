@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+// valor em pixels dos tamanhos de tela mais comuns
 $phone-width: 319px;
 $tablet-portrait: 768px;
 $tablet-landscape: 1025px;
@@ -50,6 +51,7 @@ $main-fontfamily: Source Sans Pro;
     }
 }
 
+// estilização que será usada como base para before's e after's
 %bfaf {
 	content: "";
 	position: absolute;
@@ -477,12 +479,18 @@ body {
 				#payment-data {
 					padding: 0 30px;
 
+					@include phone {
+						padding: 0;
+					}
 					.plano-escolhido {
 						padding: 60px 15px 20px;
 						font-size: 16px;
 
 						@include phone {
 							display: none;
+						}
+						&.has-error {
+							padding: 15px;
 						}
 						p {
 							font-size: 16px;
@@ -495,29 +503,85 @@ body {
 						}
 					}
 					#credit-card-form {
+						@include phone {
+							padding-top: 40px;
+						}
 						.input-container {
 							float: left;
 							margin-bottom: 15px;
 
+							&.code {
+								.frm-error-wrapper {
+									.glyphicon-remove {
+										right: calc(40% - 10px);
+
+										@include phone {
+											right: calc(40% - 30px);
+										}
+									}
+									.frm-error {
+										@include phone {
+											right: calc(40% - 30px);
+										}
+									}
+								}
+							}
+							&.col-md-8 {
+								width: 66.666%;
+							}
+							&.col-md-4 {
+								width: 33.333%;
+							}
 							label {
 								color: #737373;
 								font-weight: 500;
 								font-size: 16px;
 								width: 100%;
-								font-weight: 500;
+								font-weight: 600;
 							}
 							select {
 								float: left;
 								padding: 0 15px;
 								width: 50%;
 
+								@include phone {
+									width: 30%;
+								}
 								&:first-of-type {
 									width: 45%;
 									margin-right: 5%;
+
+									@include phone {
+										width: 30%;
+									}
 								}
 							}
 							.form-control {
 								height: 40px;
+
+								&#card-code {
+									width: 65%;
+								}
+							}
+							.frm-error-wrapper {
+								padding: 0;
+								margin-bottom: 20px;
+
+								.glyphicon-remove {
+									color: #ec0000;
+									top: 30px;
+									right: 15px;
+								}
+								.frm-error {
+									color: #ec0000;
+									font-weight: 600;
+									position: absolute;
+
+									@include phone {
+										top: 0;
+										right: 15px;
+									}
+								}
 							}
 						}
 					}
@@ -525,6 +589,13 @@ body {
 						text-align: center;
 						margin: 25px 0 60px;
 
+						&.has-error {
+							margin-bottom: 25px;
+
+							.alert-warning {
+								margin-top: -25px;
+							}
+						}
 						.alert-warning {
 							margin: 0;
 							padding: 20px 0;
@@ -532,6 +603,11 @@ body {
 							border: 1px solid #FFEC83;
 							background-color: #FCF7DE;
 							border-radius: 2px;
+
+							@include phone {
+								padding: 20px 45px;
+								font-size: 15px;
+							}
 						}
 					}
 				}

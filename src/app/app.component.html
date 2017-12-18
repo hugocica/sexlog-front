@@ -84,7 +84,7 @@
             </div>
 
             <div id="payment-data" class="plano-content container" style="display: none;">
-                <div class="plano-escolhido">
+                <div class="plano-escolhido has-error">
                     <p>
                         Plano escolhido: <span>Trimestral - R$119,70</span>
                     </p>
@@ -92,11 +92,15 @@
 
                 <div id="credit-card-form" class="form-container clearfix">
                     <form action="">
-                        <div class="input-container col-md-8">
+                        <div class="input-container number col-md-8">
                             <label for="">Número do cartão</label>
-                            <input type="text" class="form-control" placeholder="Número do cartão">
+                            <input id="card-number" type="text" class="form-control has-error" placeholder="Número do cartão" (blur)="validateForm()">
+                            <div class="frm-error-wrapper">
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="frm-error">Esse campo não pode estar vazio</span>
+                            </div>
                         </div>
-                        <div class="input-container col-md-4">
+                        <div class="input-container expiration col-md-4">
                             <label>Validade</label>
                             <select id="validade-mes"name="validade-mes" class="form-control">
                                 <option value="">Mês</option>
@@ -126,18 +130,26 @@
                             </select>
                         </div>
 
-                        <div class="input-container col-md-8">
+                        <div class="input-container name col-md-8">
                             <label for="">Nome do Titular</label>
-                            <input type="text" class="form-control" placeholder="Nome do titular">
+                            <input id="card-titular" type="text" class="form-control" placeholder="Nome do titular">
+                            <div class="frm-error-wrapper">
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="frm-error">Esse campo não pode estar vazio</span>
+                            </div>
                         </div>
-                        <div class="input-container col-md-4">
+                        <div class="input-container code col-md-4 col-xs-12">
                             <label for="">Código de segurança</label>
-                            <input type="number" class="form-control" placeholder="000">
+                            <input id="card-code" type="number" class="form-control" placeholder="000">
+                            <div class="frm-error-wrapper">
+                                <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                                <span class="frm-error">Esse campo não pode estar vazio</span>
+                            </div>
                         </div>
                     </form>
                 </div>
 
-                <div class="privacidade-warning col-md-12">
+                <div class="privacidade-warning has-error col-md-12">
                     <p class="alert-warning">Para sua privacidade, a cobrança será feita em nome de "assinet-pgto-sl".</p>
                 </div>
             </div>
