@@ -100,7 +100,7 @@ export class AppComponent {
         }, 5);
     }
 
-    onNextStepClick(event: any) {
+    onNextStepClick() {
         // caso seja para avançar para o formulário do cartão
         if ( this.nextStep && !this.btnFinish ) {
             // mainBtn.remove("next").className += " finish";
