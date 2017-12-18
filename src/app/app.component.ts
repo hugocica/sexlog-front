@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
     nextStep = true;
     btnFinish = false;
+    $ = jQuery;
     planID = 0;
 
     //variáveis das opções de planos de assinatura
@@ -31,7 +32,7 @@ export class AppComponent {
     constructor() {
         var dataJson;
 
-        jQuery.ajax({
+        this.$.ajax({
             dataType: 'json',
             method: 'GET',
             url: '../assets/js/data.json',
@@ -44,9 +45,9 @@ export class AppComponent {
             this.firstName = dataJson[0].name;
             this.secondName = dataJson[1].name;
             this.thirdName = dataJson[2].name;
-            jQuery('#plano-1 .economize').html(dataJson[0].discount);
-            jQuery('#plano-2 .economize').html(dataJson[1].discount);
-            jQuery('#plano-3 .economize').html(dataJson[2].discount);
+            this.$('#plano-1 .economize').html(dataJson[0].discount);
+            this.$('#plano-2 .economize').html(dataJson[1].discount);
+            this.$('#plano-3 .economize').html(dataJson[2].discount);
 
             this.valorCurrency = dataJson[this.planID].price.currency;
             this.valorInteger = dataJson[this.planID].price.integer;
@@ -54,15 +55,15 @@ export class AppComponent {
             this.valorPeriodo = dataJson[this.planID].price.periodicy;
             this.planDetails = dataJson[this.planID].details;
 
-            jQuery('.valor-total-container p').html(dataJson[this.planID].total);
-            jQuery('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
-            jQuery('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
-            jQuery('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
+            this.$('.valor-total-container p').html(dataJson[this.planID].total);
+            this.$('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
+            this.$('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
+            this.$('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
         }, 5);
     }
 
     choosePlanOption(event: any) {
-        jQuery('.opcao-box').removeClass('active');
+        this.$('.opcao-box').removeClass('active');
 
         if ( (<HTMLInputElement>event.target).className == 'opcao-box' ) {
             (<HTMLInputElement>event.target).className += " active";
@@ -73,9 +74,9 @@ export class AppComponent {
         }
 
         var dataJson;
-        this.planID = jQuery('.opcao-box.active').attr('data-id');
+        this.planID = this.$('.opcao-box.active').attr('data-id');
 
-        jQuery.ajax({
+        this.$.ajax({
             dataType: 'json',
             method: 'GET',
             url: '../assets/js/data.json',
@@ -91,10 +92,10 @@ export class AppComponent {
             this.valorPeriodo = dataJson[this.planID].price.periodicy;
             this.planDetails = dataJson[this.planID].details;
 
-            jQuery('.valor-total-container p').html(dataJson[this.planID].total);
-            jQuery('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
-            jQuery('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
-            jQuery('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
+            this.$('.valor-total-container p').html(dataJson[this.planID].total);
+            this.$('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
+            this.$('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
+            this.$('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
         }, 5);
     }
 
@@ -102,15 +103,162 @@ export class AppComponent {
         // caso seja para avançar para o formulário do cartão
         if ( this.nextStep && !this.btnFinish ) {
             // mainBtn.remove("next").className += " finish";
-            jQuery('#payment-info').slideUp().next().slideDown();
-            jQuery('#steps-btn').text('Concluir minha assinatura');
-            jQuery('.plano-flow .flow-content:first-of-type').removeClass('active').next().addClass('active');
+            this.$('#payment-info').slideUp().next().slideDown();
+            this.$('#steps-btn').text('Concluir minha assinatura');
+            this.$('.plano-flow .flow-content:first-of-type').removeClass('active').next().addClass('active');
 
             this.nextStep = false;
             this.btnFinish = true;
         } else {
-            jQuery('#payment-data, .plano-flow, .vipmodal-footer').slideUp();
-            jQuery('#payment-end').slideDown();
+            var validateFlag = false;
+            var msg = Array();
+        	var tipo = null;
+            var cardNumber = $('#card-number').val();
+            var validadeMes = $('#validade-mes').val();
+            var validadeAno = $('#validade-ano').val();
+            var nomeTitular = $('#card-titular').val();
+            var cardCode = $('#card-code').val();
+
+            $('.number .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Cartão inválido');
+            $('.expiration .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Validade inválida');
+            $('.name .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
+            $('.code .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Código inválido');
+
+            // validação do número do cartão: testa caso o campo seja vazio e verifica se o número é válido (bem como operadora caso precise)
+            if ( cardNumber.length == 0 ) {
+                msg.push("Esse campo não pode estar vazio");
+                $('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
+            } else if ( cardNumber.length > 16 || cardNumber[0] == 0 ) {
+
+        		msg.push("Número de cartão inválido");
+
+        	} else {
+
+        		var total = 0, dig = 0, num = 0, dig1 = 0, dig2 = 0;
+                var operadora = '';
+        		var arr = Array();
+
+        		for ( var i = 0; i < cardNumber.length; i++ ) {
+        			if ( i % 2 == 0 ) {
+        				dig = cardNumber[i] * 2;
+
+        				if ( dig > 9 ) {
+        					dig1 = dig.toString().substr(0,1);
+        					dig2 = dig.toString().substr(1,1);
+        					arr[i] = parseInt(dig1) + parseInt(dig2);
+        				} else {
+        					arr[i] = parseInt(dig);
+        				}
+
+        				total += parseInt(arr[i]);
+
+        			} else {
+        				arr[i] = parseInt(cardNumber[i]);
+        				total += parseInt(arr[i]);
+        			}
+        		}
+
+        		switch ( parseInt( cardNumber[0] ) ) {
+        			case 0:
+        				msg.push("Número incorreto");
+        				break;
+        			case 1:
+        				tipo = "Empresas Aéreas";
+        				break;
+        			case 2:
+        				tipo = "Empresas Aéreas";
+        				break
+        			case 3:
+        				tipo = "Viagens e Entretenimento";
+        				if ( parseInt( cardNumber[0] + cardNumber[1] ) == 34 || parseInt( cardNumber[0] + num[1]) == 37 ) {
+                            operadora = "Amex";
+                        }
+        				if ( parseInt( num[0] + num[1]) == 36 ) {
+                            operadora = "Diners";
+                        }
+        				break
+        			case 4:
+        				tipo = "Bancos e Instituições Financeiras";
+        				operadora = "visa";
+        				break
+        			case 5:
+        				if ( parseInt( num[0] + num[1] ) >= 51 && parseInt( num[0] + num[1]) <= 55 ) {
+                            operadora = "Mastercard";
+                        }
+        				tipo = "Bancos e Instituições Financeiras";
+        				operadora = "Mastercard"
+        				break;
+        			case 6:
+        				tipo = "Bancos e Comerciais";
+        				operadora = "";
+        				break
+        			case 7:
+        				tipo = "Companhias de petróleo";
+        				operadora = "";
+        				break
+        			case 8:
+        				tipo = "Companhia de telecomunicações";
+        				operadora = "";
+        				break
+        			case 9:
+        				tipo = "Nacionais";
+        				operadora = "";
+        				break
+        			default:
+        				msg.push("Número incorreto");
+        				break;
+        			}
+            }
+
+            if ( msg.length > 0 ) {
+
+            	console.log(msg);
+
+            } else {
+        		if( total % 10 == 0 ){
+        			validateFlag = true;
+        		} else {
+                    $('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Cartão inválido');
+                    validateFlag = false;
+        		}
+        	}
+
+            // valida data do cartão
+            var date = new Date();
+            var monthNumber = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if ( validadeAno == year || validadeMes.length == 0 || validadeAno.length == 0 ) {
+                if ( validadeMes < monthNumber ) {
+                    $('.expiration .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Validade inválida');
+                    validateFlag = false;
+                }
+            } else {
+                validateFlag = true;
+            }
+
+            // valida caso o nome esteja em branco
+            if ( nomeTitular.length == 0 ) {
+                $('.name .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
+                validateFlag = false;
+            } else {
+                validateFlag = true;
+            }
+
+            // valida o código de segurança do cartão
+            if ( cardCode.length == 0 || cardCode.length != 3 ) {
+                $('.code .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Código inválido');
+                validateFlag = false;
+            } else {
+                validateFlag = true;
+            }
+
+            if ( validateFlag ) {
+                this.$('#payment-data, .plano-flow, .vipmodal-footer').slideUp();
+                this.$('#payment-end').slideDown();
+
+                this.btnFinish = false;
+            }
         }
     }
 

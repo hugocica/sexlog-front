@@ -504,7 +504,7 @@ body {
 					}
 					#credit-card-form {
 						@include phone {
-							padding-top: 40px;
+							padding-top: 30px;
 						}
 						.input-container {
 							float: left;
@@ -523,7 +523,7 @@ body {
 										right: calc(40% - 10px);
 
 										@include phone {
-											right: calc(40% - 30px);
+											right: calc(40% - 15px);
 										}
 									}
 									.frm-error {
@@ -533,11 +533,26 @@ body {
 									}
 								}
 							}
+							&.expiration {
+								.frm-error-wrapper {
+									width: 100%;
+									clear: both;
+									display: block;
+								}
+							}
 							&.col-md-8 {
 								width: 66.666%;
+
+								@include phone {
+									width: 100%;
+								}
 							}
 							&.col-md-4 {
 								width: 33.333%;
+
+								@include phone {
+									width: 100%;
+								}
 							}
 							label {
 								color: #737373;
@@ -548,7 +563,7 @@ body {
 							}
 							select {
 								float: left;
-								padding: 0 15px;
+								padding: 0 10px !important;
 								width: 50%;
 
 								@include phone {
@@ -574,7 +589,11 @@ body {
 							.frm-error-wrapper {
 								padding: 0;
 								margin-bottom: 20px;
+								visibility: hidden;
 
+								&.has-error {
+									visibility: visible;
+								}
 								.glyphicon-remove {
 									color: #ec0000;
 									top: 30px;
@@ -586,8 +605,8 @@ body {
 									position: absolute;
 
 									@include phone {
-										top: 0;
-										right: 15px;
+										bottom: 0;
+										left: 15px;
 									}
 								}
 							}
