@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+declare var $:any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,7 +10,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
     nextStep = true;
     btnFinish = false;
-    $ = jQuery;
     planID = 0;
 
     //variáveis das opções de planos de assinatura
@@ -32,7 +33,7 @@ export class AppComponent {
     constructor() {
         var dataJson;
 
-        this.$.ajax({
+        $.ajax({
             dataType: 'json',
             method: 'GET',
             url: '../assets/js/data.json',
@@ -45,9 +46,9 @@ export class AppComponent {
             this.firstName = dataJson[0].name;
             this.secondName = dataJson[1].name;
             this.thirdName = dataJson[2].name;
-            this.$('#plano-1 .economize').html(dataJson[0].discount);
-            this.$('#plano-2 .economize').html(dataJson[1].discount);
-            this.$('#plano-3 .economize').html(dataJson[2].discount);
+            $('#plano-1 .economize').html(dataJson[0].discount);
+            $('#plano-2 .economize').html(dataJson[1].discount);
+            $('#plano-3 .economize').html(dataJson[2].discount);
 
             this.valorCurrency = dataJson[this.planID].price.currency;
             this.valorInteger = dataJson[this.planID].price.integer;
@@ -55,15 +56,15 @@ export class AppComponent {
             this.valorPeriodo = dataJson[this.planID].price.periodicy;
             this.planDetails = dataJson[this.planID].details;
 
-            this.$('.valor-total-container p').html(dataJson[this.planID].total);
-            this.$('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
-            this.$('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
-            this.$('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
+            $('.valor-total-container p').html(dataJson[this.planID].total);
+            $('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
+            $('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
+            $('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
         }, 5);
     }
 
     choosePlanOption(event: any) {
-        this.$('.opcao-box').removeClass('active');
+        $('.opcao-box').removeClass('active');
 
         if ( (<HTMLInputElement>event.target).className == 'opcao-box' ) {
             (<HTMLInputElement>event.target).className += " active";
@@ -74,9 +75,9 @@ export class AppComponent {
         }
 
         var dataJson;
-        this.planID = this.$('.opcao-box.active').attr('data-id');
+        this.planID = $('.opcao-box.active').attr('data-id');
 
-        this.$.ajax({
+        $.ajax({
             dataType: 'json',
             method: 'GET',
             url: '../assets/js/data.json',
@@ -92,10 +93,10 @@ export class AppComponent {
             this.valorPeriodo = dataJson[this.planID].price.periodicy;
             this.planDetails = dataJson[this.planID].details;
 
-            this.$('.valor-total-container p').html(dataJson[this.planID].total);
-            this.$('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
-            this.$('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
-            this.$('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
+            $('.valor-total-container p').html(dataJson[this.planID].total);
+            $('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
+            $('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
+            $('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
         }, 5);
     }
 
@@ -103,9 +104,9 @@ export class AppComponent {
         // caso seja para avançar para o formulário do cartão
         if ( this.nextStep && !this.btnFinish ) {
             // mainBtn.remove("next").className += " finish";
-            this.$('#payment-info').slideUp().next().slideDown();
-            this.$('#steps-btn').text('Concluir minha assinatura');
-            this.$('.plano-flow .flow-content:first-of-type').removeClass('active').next().addClass('active');
+            $('#payment-info').slideUp().next().slideDown();
+            $('#steps-btn').text('Concluir minha assinatura');
+            $('.plano-flow .flow-content:first-of-type').removeClass('active').next().addClass('active');
 
             this.nextStep = false;
             this.btnFinish = true;
@@ -113,21 +114,21 @@ export class AppComponent {
             var validateFlag = false;
             var msg = Array();
         	var tipo = null;
-            var cardNumber = this.$('#card-number').val();
-            var validadeMes = this.$('#validade-mes').val();
-            var validadeAno = this.$('#validade-ano').val();
-            var nomeTitular = this.$('#card-titular').val();
-            var cardCode = this.$('#card-code').val();
+            var cardNumber = $('#card-number').val();
+            var validadeMes = $('#validade-mes').val();
+            var validadeAno = $('#validade-ano').val();
+            var nomeTitular = $('#card-titular').val();
+            var cardCode = $('#card-code').val();
 
-            this.$('.number .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Cartão inválido');
-            this.$('.expiration .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Validade inválida');
-            this.$('.name .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
-            this.$('.code .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Código inválido');
+            $('.number .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Cartão inválido');
+            $('.expiration .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Validade inválida');
+            $('.name .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
+            $('.code .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Código inválido');
 
             // validação do número do cartão: testa caso o campo seja vazio e verifica se o número é válido (bem como operadora caso precise)
             if ( cardNumber.length == 0 ) {
                 msg.push("Esse campo não pode estar vazio");
-                this.$('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
+                $('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
             } else if ( cardNumber.length > 16 || cardNumber[0] == 0 ) {
 
         		msg.push("Número de cartão inválido");
@@ -218,7 +219,7 @@ export class AppComponent {
         		if( total % 10 == 0 ){
         			validateFlag = true;
         		} else {
-                    this.$('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Cartão inválido');
+                    $('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Cartão inválido');
                     validateFlag = false;
         		}
         	}
@@ -230,7 +231,7 @@ export class AppComponent {
 
             if ( validadeAno == year || validadeMes.length == 0 || validadeAno.length == 0 ) {
                 if ( validadeMes < monthNumber ) {
-                    this.$('.expiration .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Validade inválida');
+                    $('.expiration .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Validade inválida');
                     validateFlag = false;
                 }
             } else {
@@ -239,7 +240,7 @@ export class AppComponent {
 
             // valida caso o nome esteja em branco
             if ( nomeTitular.length == 0 ) {
-                this.$('.name .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
+                $('.name .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
                 validateFlag = false;
             } else {
                 validateFlag = true;
@@ -247,15 +248,15 @@ export class AppComponent {
 
             // valida o código de segurança do cartão
             if ( cardCode.length == 0 || cardCode.length != 3 ) {
-                this.$('.code .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Código inválido');
+                $('.code .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Código inválido');
                 validateFlag = false;
             } else {
                 validateFlag = true;
             }
 
             if ( validateFlag ) {
-                this.$('#payment-data, .plano-flow, .vipmodal-footer').slideUp();
-                this.$('#payment-end').slideDown();
+                $('#payment-data, .plano-flow, .vipmodal-footer').slideUp();
+                $('#payment-end').slideDown();
 
                 this.btnFinish = false;
             }
