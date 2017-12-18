@@ -113,21 +113,21 @@ export class AppComponent {
             var validateFlag = false;
             var msg = Array();
         	var tipo = null;
-            var cardNumber = $('#card-number').val();
-            var validadeMes = $('#validade-mes').val();
-            var validadeAno = $('#validade-ano').val();
-            var nomeTitular = $('#card-titular').val();
-            var cardCode = $('#card-code').val();
+            var cardNumber = this.$('#card-number').val();
+            var validadeMes = this.$('#validade-mes').val();
+            var validadeAno = this.$('#validade-ano').val();
+            var nomeTitular = this.$('#card-titular').val();
+            var cardCode = this.$('#card-code').val();
 
-            $('.number .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Cartão inválido');
-            $('.expiration .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Validade inválida');
-            $('.name .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
-            $('.code .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Código inválido');
+            this.$('.number .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Cartão inválido');
+            this.$('.expiration .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Validade inválida');
+            this.$('.name .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
+            this.$('.code .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Código inválido');
 
             // validação do número do cartão: testa caso o campo seja vazio e verifica se o número é válido (bem como operadora caso precise)
             if ( cardNumber.length == 0 ) {
                 msg.push("Esse campo não pode estar vazio");
-                $('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
+                this.$('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
             } else if ( cardNumber.length > 16 || cardNumber[0] == 0 ) {
 
         		msg.push("Número de cartão inválido");
@@ -218,7 +218,7 @@ export class AppComponent {
         		if( total % 10 == 0 ){
         			validateFlag = true;
         		} else {
-                    $('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Cartão inválido');
+                    this.$('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Cartão inválido');
                     validateFlag = false;
         		}
         	}
@@ -230,7 +230,7 @@ export class AppComponent {
 
             if ( validadeAno == year || validadeMes.length == 0 || validadeAno.length == 0 ) {
                 if ( validadeMes < monthNumber ) {
-                    $('.expiration .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Validade inválida');
+                    this.$('.expiration .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Validade inválida');
                     validateFlag = false;
                 }
             } else {
@@ -239,7 +239,7 @@ export class AppComponent {
 
             // valida caso o nome esteja em branco
             if ( nomeTitular.length == 0 ) {
-                $('.name .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
+                this.$('.name .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
                 validateFlag = false;
             } else {
                 validateFlag = true;
@@ -247,7 +247,7 @@ export class AppComponent {
 
             // valida o código de segurança do cartão
             if ( cardCode.length == 0 || cardCode.length != 3 ) {
-                $('.code .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Código inválido');
+                this.$('.code .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Código inválido');
                 validateFlag = false;
             } else {
                 validateFlag = true;
