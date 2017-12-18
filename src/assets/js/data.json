@@ -16,7 +16,8 @@
              "Pagamento no <b>cartão de crédito</b>",
              "Parcela única no <b>débito em conta</b>",
              "Pagamento no <b>boleto bancário</b>"
-         ]
+         ],
+         "details": "Mensal - R$ 49,90"
       },
       {
          "id":2,
@@ -38,7 +39,8 @@
             "Até 3x iguais no <b>cartão de crédito</b>",
             "Parcela única no <b>débito em conta</b>",
             "Pagamento no <b>boleto bancário</b>"
-        ]
+        ],
+        "details": "Trimestral - R$ 89,70"
       },
       {
          "id":3,
@@ -63,7 +65,8 @@
             "Até 6x iguais no <b>cartão de crédito</b>",
             "Parcela única no <b>débito em conta</b>",
             "Pagamento no <b>boleto bancário</b>"
-        ]
+        ],
+        "details": "Semestral - R$ 137,40"
       }
    ]
 }

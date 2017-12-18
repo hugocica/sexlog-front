@@ -510,6 +510,13 @@ body {
 							float: left;
 							margin-bottom: 15px;
 
+							&.number {
+								.form-control {
+									background-image: url('./assets/img/credit-card-number.png');
+									background-repeat: no-repeat;
+									padding-left: 70px;
+								}
+							}
 							&.code {
 								.frm-error-wrapper {
 									.glyphicon-remove {
@@ -558,6 +565,7 @@ body {
 							}
 							.form-control {
 								height: 40px;
+								padding-right: 30px;
 
 								&#card-code {
 									width: 65%;
