@@ -60,7 +60,7 @@ export class AppComponent {
             $('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
             $('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
             $('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
-        }, 100);
+        }, 500);
     }
 
     choosePlanOption(event: any) {
@@ -97,7 +97,7 @@ export class AppComponent {
             $('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
             $('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
             $('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
-        }, 100);
+        }, 500);
     }
 
     onNextStepClick() {
