@@ -134,7 +134,7 @@ export class AppComponent {
 
         	} else {
 
-        		var total = 0, dig = 0, num = 0, dig1 = 0, dig2 = 0;
+        		var total = 0, num = 0, dig = 0, dig1 = '', dig2 = '';
                 var operadora = '';
         		var arr = Array();
 
@@ -145,15 +145,15 @@ export class AppComponent {
         				if ( dig > 9 ) {
         					dig1 = dig.toString().substr(0,1);
         					dig2 = dig.toString().substr(1,1);
-        					arr[i] = parseInt(dig1) + parseInt(dig2);
+        					arr[i] = (dig1) + parseInt(dig2);
         				} else {
-        					arr[i] = parseInt(dig);
+        					arr[i] = (dig);
         				}
 
         				total += parseInt(arr[i]);
 
         			} else {
-        				arr[i] = parseInt(cardNumber[i]);
+        				arr[i] = (cardNumber[i]);
         				total += parseInt(arr[i]);
         			}
         		}
