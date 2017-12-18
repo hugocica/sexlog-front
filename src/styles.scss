@@ -1,5 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
+$phone-width: 319px;
+$tablet-portrait: 768px;
+$tablet-landscape: 1025px;
+$laptop-width: 1200px;
+$desktop-1366-width: 1367px;
+$desktop-1440-width: 1441px;
+
 // declaração de variáveis
 $sexlog-purple: #691979;
 $sexlog-green: #49CBA4;
@@ -84,6 +91,40 @@ body {
         height: 100vh;
         display: inline-block;
 
+		.main-btn {
+			font-family: $main-fontfamily;
+			font-size: 18px;
+			font-weight: 700;
+			box-shadow: none;
+			width: 100%;
+			text-align: center;
+			max-width: 400px;
+			padding: 13px 0;
+			margin-left: 10px;
+			border-radius: 6px;
+			outline: none;
+			border: 2px solid;
+			cursor: pointer;
+
+			@include phone {
+				position: fixed;
+				left: 0;
+				bottom: 0;
+				margin-left: 0;
+				border-radius: 0;
+				border: none;
+				padding: 20px 0;
+			}
+			&.green-btn {
+				background-color: $sexlog-green;
+				color: #fff;
+				border-color: #32B48D;
+			}
+			&.purple-btn {
+				background-color: $sexlog-purple;
+				color: #fff;
+			}
+		}
         .vipmodal {
             background-color: #f5f5f5;
             width: 900px;
@@ -95,6 +136,13 @@ body {
             margin: 0;
             overflow: hidden;
 
+			@include phone {
+				width: 100%;
+				left: 0;
+				top: 0;
+				height: 100vh;
+				border-radius: 0;
+			}
             .vipmodal-header {
                 position: relative;
                 padding: 15px 0;
@@ -133,6 +181,9 @@ body {
                     border-top: 1px solid #E0E0E0;
                     border-bottom: 1px solid #E0E0E0;
 
+					@include phone {
+						display: none;
+					}
                     .flow-content {
                         float: left;
                         width: 50%;
@@ -180,21 +231,32 @@ body {
 	                    text-align: center;
 	                    height: 295px;
 
+						@include phone {
+							width: 100%;
+							height: auto;
+						}
 	                    .inner-wrapper {
 	                        display: inline-block;
 	                        vertical-align: middle;
 
 	                        .valor-container {
-	                            padding: 15px 0 45px;
-								margin-bottom: 8px;
-								border-bottom: 2px dotted #DCDCDC;
+	                            padding: 15px 0;
+								// margin-bottom: 8px;
+								// border-bottom: 2px dotted #DCDCDC;
 
+								@include phone {
+									padding: 80px 0 90px;
+								}
 	                            .real-symbol {
 									color: #636363;
 									vertical-align: top;
 									position: relative;
 									top: -12px;
 									font-size: 18px;
+
+									@include phone {
+										font-size: 22px;
+									}
 	                            }
 	                            .valor-number {
 	                                display: inline-block;
@@ -205,10 +267,17 @@ body {
 	                                margin: 0;
 	                                line-height: 45px;
 
+									@include phone {
+										font-size: 120px;
+									}
 	                                .moeda {
 	                                    line-height: 15px;
 	                                    vertical-align: top;
 	                                    font-size: 35px;
+
+										@include phone {
+											font-size: 42px;
+										}
 	                                }
 	                            }
 								.mes-texto {
@@ -218,9 +287,33 @@ body {
 									font-size: 18px;
 									color: #D51D73;
 									font-weight: 500;
+
+									@include phone {
+										font-size: 22px;
+										right: 45px;
+									}
 								}
 	                        }
+							.valor-total-container {
+								border-bottom: 2px dotted #DCDCDC;
+								margin-bottom: 8px;
+
+								@include phone {
+									display: none;
+								}
+								p {
+									color: #636363;
+
+									span {
+										color: $sexlog-purple;
+										font-weight: 700;
+									}
+								}
+							}
 	                        .pagamento-detalhes {
+								@include phone {
+									display: none;
+								}
 	                            .pagamento-tipo {
 	                                margin: 3px 0;
 									text-align: left;
@@ -228,7 +321,7 @@ body {
 	                                img {
 	                                    display: inline-block;
 	                                    vertical-align: middle;
-	                                    margin: 0 5px;
+	                                    margin: 0 5px 0 0;
 	                                }
 	                                p {
 	                                    display: inline-block;
@@ -250,11 +343,22 @@ body {
 	                    width: 50%;
 	                    height: 295px;
 
+						@include phone {
+							width: 100%;
+						}
+						.vertical-helper {
+							@include phone {
+								display: none;
+							}
+						}
 	                    .inner-wrapper {
 	                        display: inline-block;
 	                        vertical-align: middle;
 	                        width: 92%;
 
+							@include phone {
+								width: 100%;
+							}
 	                        .opcao-box {
 	                            background-color: #fff;
 	                            width: 100%;
@@ -270,6 +374,10 @@ body {
 								// -webkit-transition: all 250ms ease;
 								// transition: all 250ms ease;
 
+								@include phone {
+									max-width: calc(100% - 10px);
+									margin: 0 auto;
+								}
 	                            &:not(:last-of-type) {
 	                                margin-bottom: 5px;
 	                            }
@@ -308,6 +416,10 @@ body {
 										border-top: 24px solid transparent;
 										border-bottom: 24px solid transparent;
 										border-right: 17px solid #691979;
+
+										@include phone {
+											content: none;
+										}
 			                        }
 									.bullet-check {
 										&:after {
@@ -369,6 +481,9 @@ body {
 						padding: 60px 15px 20px;
 						font-size: 16px;
 
+						@include phone {
+							display: none;
+						}
 						p {
 							font-size: 16px;
 							color: #9C9C9C;
@@ -439,17 +554,8 @@ body {
 					}
 					a {
 						&.main-btn {
-							padding: 15px 95px;
 							display: inline-block;
-							border-radius: 4px;
-							font-size: 18px;
-							font-weight: 700;
 							margin-top: 30px;
-
-							&.purple-btn {
-								background-color: $sexlog-purple;
-								color: #fff;
-							}
 						}
 					}
 				}
@@ -460,11 +566,18 @@ body {
                 width: 100%;
                 border-top: 1px solid #E0E0E0;
 
+				@include phone {
+					border-top: none;
+					height: auto;
+				}
 				.ssl-symbol {
 					float: left;
 					width: 50%;
 					height: 100%;
 
+					@include phone {
+						display: none;
+					}
 					.inner-wrapper {
 						display: inline-block;
 						vertical-align: middle;
@@ -477,32 +590,13 @@ body {
 					width: 50%;
 					height: 100%;
 
+					@include phone {
+						width: 100%;
+					}
 					.inner-wrapper {
 						display: inline-block;
 						vertical-align: middle;
 						width: 99%;
-
-						.main-btn {
-							font-family: $main-fontfamily;
-							font-size: 18px;
-							font-weight: 700;
-							box-shadow: none;
-							width: 100%;
-							text-align: center;
-							max-width: 400px;
-							padding: 13px 0;
-							margin-left: 10px;
-							border-radius: 6px;
-							outline: none;
-							border: 2px solid;
-							cursor: pointer;
-
-							&.green-btn {
-								background-color: $sexlog-green;
-								color: #fff;
-								border-color: #32B48D;
-							}
-						}
 					}
 				}
             }

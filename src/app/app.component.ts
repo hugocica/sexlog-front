@@ -9,6 +9,7 @@ export class AppComponent {
     nextStep = true;
     btnFinish = false;
     $ = jQuery;
+    planID = 0;
 
     //variáveis das opções de planos de assinatura
     firstName = '';
@@ -47,14 +48,15 @@ export class AppComponent {
             this.$('#plano-2 .economize').html(dataJson[1].discount);
             this.$('#plano-3 .economize').html(dataJson[2].discount);
 
-            this.valorCurrency = dataJson[0].price.currency;
-            this.valorInteger = dataJson[0].price.integer;
-            this.valorDecimal = dataJson[0].price.decimal;
-            this.valorPeriodo = dataJson[0].price.periodicy;
+            this.valorCurrency = dataJson[this.planID].price.currency;
+            this.valorInteger = dataJson[this.planID].price.integer;
+            this.valorDecimal = dataJson[this.planID].price.decimal;
+            this.valorPeriodo = dataJson[this.planID].price.periodicy;
 
-            this.$('.pagamento-tipo.credito p').html(dataJson[0].payments[0]);
-            this.$('.pagamento-tipo.debito p').html(dataJson[0].payments[1]);
-            this.$('.pagamento-tipo.boleto p').html(dataJson[0].payments[2]);
+            this.$('.valor-total-container p').html(dataJson[this.planID].total);
+            this.$('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
+            this.$('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
+            this.$('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
         }, 5);
     }
 
@@ -70,7 +72,7 @@ export class AppComponent {
         }
 
         var dataJson;
-        var planID = this.$('.opcao-box.active').attr('data-id');
+        this.planID = this.$('.opcao-box.active').attr('data-id');
 
         this.$.ajax({
             dataType: 'json',
@@ -82,14 +84,15 @@ export class AppComponent {
         });
 
         setTimeout(() => {
-            this.valorCurrency = dataJson[planID].price.currency;
-            this.valorInteger = dataJson[planID].price.integer;
-            this.valorDecimal = dataJson[planID].price.decimal;
-            this.valorPeriodo = dataJson[planID].price.periodicy;
+            this.valorCurrency = dataJson[this.planID].price.currency;
+            this.valorInteger = dataJson[this.planID].price.integer;
+            this.valorDecimal = dataJson[this.planID].price.decimal;
+            this.valorPeriodo = dataJson[this.planID].price.periodicy;
 
-            this.$('.pagamento-tipo.credito p').html(dataJson[planID].payments[0]);
-            this.$('.pagamento-tipo.debito p').html(dataJson[planID].payments[1]);
-            this.$('.pagamento-tipo.boleto p').html(dataJson[planID].payments[2]);
+            this.$('.valor-total-container p').html(dataJson[this.planID].total);
+            this.$('.pagamento-tipo.credito p').html(dataJson[this.planID].payments[0]);
+            this.$('.pagamento-tipo.debito p').html(dataJson[this.planID].payments[1]);
+            this.$('.pagamento-tipo.boleto p').html(dataJson[this.planID].payments[2]);
         }, 5);
     }
 
