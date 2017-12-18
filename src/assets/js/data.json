@@ -20,7 +20,7 @@
       },
       {
          "id":2,
-         "name":"3 mês",
+         "name":"3 meses",
          "discount":"Economize <span class='percetage'>40%</span>",
          "total":"Total: R$ 89,70 em até 3x iguais no cartão de crédito",
          "price":{
@@ -42,7 +42,7 @@
       },
       {
          "id":3,
-         "name":"6 mês",
+         "name":"6 meses",
          "discount":"Economize <span class='percetage'>54%</span>",
          "total":"Total: R$ 137,40 em até 6x iguais no cartão de crédito",
          "price":{
