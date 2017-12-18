@@ -36,7 +36,7 @@ export class AppComponent {
         $.ajax({
             dataType: 'json',
             method: 'GET',
-            url: '../assets/js/data.json',
+            url: './assets/js/data.json',
             success: function( data ) {
                 dataJson = data.plans;
             }
@@ -80,7 +80,7 @@ export class AppComponent {
         $.ajax({
             dataType: 'json',
             method: 'GET',
-            url: '../assets/js/data.json',
+            url: './assets/js/data.json',
             success: function( data ) {
                 dataJson = data.plans;
             }
