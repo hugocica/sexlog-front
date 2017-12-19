@@ -120,10 +120,10 @@ export class AppComponent {
             var nomeTitular = $('#card-titular').val();
             var cardCode = $('#card-code').val();
 
-            $('.number .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Cartão inválidox');
-            $('.expiration .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Validade inválida');
-            $('.name .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
-            $('.code .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Código inválido');
+            $('.number .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Cartão inválidox').parent().parent().removeClass('has-error');
+            $('.expiration .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Validade inválida').parent().parent().removeClass('has-error');
+            $('.name .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio').parent().parent().removeClass('has-error');
+            $('.code .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Código inválido').parent().parent().removeClass('has-error');
             $('.frm-error-wrapper.mobile').removeClass('has-error').children('.frm-error').text('Campos contém erros. Corrija e tente novamente');
 
             // validação do número do cartão: testa caso o campo seja vazio e verifica se o número é válido (bem como operadora caso precise)
@@ -148,16 +148,16 @@ export class AppComponent {
         				if ( dig > 9 ) {
         					dig1 = dig.toString().substr(0,1);
         					dig2 = dig.toString().substr(1,1);
-        					arr[i] = parseInt(dig1) + parseInt(dig2);
+        					arr[i] = parseInt(dig1, 10) + parseInt(dig2, 10);
         				} else {
-        					arr[i] = parseInt(dig);
+        					arr[i] = dig;
         				}
 
-        				total += parseInt(arr[i]);
+        				total += parseInt(arr[i], 10);
 
         			} else {
-        				arr[i] = parseInt(cardNumber[i]);
-        				total += parseInt(arr[i]);
+        				arr[i] = parseInt(cardNumber[i], 10);
+        				total += parseInt(arr[i], 10);
         			}
         		}
 
@@ -218,7 +218,6 @@ export class AppComponent {
             	console.log(msg);
 
             } else {
-                console.log(total % 10);
         		if( total % 10 == 0 ){
         			validateFlag = true;
         		} else {
