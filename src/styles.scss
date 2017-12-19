@@ -514,6 +514,11 @@ body {
 							@include phone {
 								margin-bottom: 0;
 							}
+							&.has-error {
+								.form-control {
+									border: 2px solid #ec0000;
+								}
+							}
 							&.number {
 								.form-control {
 									background-image: url('./assets/img/credit-card-number.png');
@@ -601,13 +606,24 @@ body {
 						visibility: hidden;
 
 						@include phone {
-							display: none !important;
+							margin-bottom: 5px;
 						}
 						&.mobile {
 							display: none;
+							position: relative;
+						    clear: both;
+						    width: calc(95% - 10px);
+							margin-left: 15px;
 
 							@include phone {
-								display: block !important;
+								display: block;
+							}
+							.frm-error {
+								@include phone {
+									display: block;
+									position: relative;
+									left: 0;
+								}
 							}
 						}
 						&.has-error {
@@ -626,6 +642,7 @@ body {
 							@include phone {
 								bottom: 0;
 								left: 15px;
+								display: none;
 							}
 						}
 					}
