@@ -120,7 +120,7 @@ export class AppComponent {
             var nomeTitular = $('#card-titular').val();
             var cardCode = $('#card-code').val();
 
-            $('.number .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Cartão inválido');
+            $('.number .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Cartão inválidox');
             $('.expiration .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Validade inválida');
             $('.name .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
             $('.code .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Código inválido');
@@ -148,15 +148,15 @@ export class AppComponent {
         				if ( dig > 9 ) {
         					dig1 = dig.toString().substr(0,1);
         					dig2 = dig.toString().substr(1,1);
-        					arr[i] = (dig1) + parseInt(dig2);
+        					arr[i] = parseInt(dig1) + parseInt(dig2);
         				} else {
-        					arr[i] = (dig);
+        					arr[i] = parseInt(dig);
         				}
 
         				total += parseInt(arr[i]);
 
         			} else {
-        				arr[i] = (cardNumber[i]);
+        				arr[i] = parseInt(cardNumber[i]);
         				total += parseInt(arr[i]);
         			}
         		}
@@ -218,6 +218,7 @@ export class AppComponent {
             	console.log(msg);
 
             } else {
+                console.log(total % 10);
         		if( total % 10 == 0 ){
         			validateFlag = true;
         		} else {
