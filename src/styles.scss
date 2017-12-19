@@ -505,12 +505,15 @@ body {
 					}
 					#credit-card-form {
 						@include phone {
-							padding-top: 30px;
+							padding-top: 10px;
 						}
 						.input-container {
 							float: left;
 							margin-bottom: 15px;
 
+							@include phone {
+								margin-bottom: 0;
+							}
 							&.number {
 								.form-control {
 									background-image: url('./assets/img/credit-card-number.png');
@@ -622,6 +625,10 @@ body {
 
 							.alert-warning {
 								margin-top: -25px;
+
+								@include phone {
+									margin-top: -20px;
+								}
 							}
 						}
 						.alert-warning {
@@ -633,8 +640,8 @@ body {
 							border-radius: 2px;
 
 							@include phone {
-								padding: 20px 45px;
-								font-size: 15px;
+								padding: 10px 15px;
+								font-size: 12px;
 							}
 						}
 					}
