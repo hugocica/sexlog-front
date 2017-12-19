@@ -593,39 +593,39 @@ body {
 									border: 2px solid #ec0000;
 								}
 							}
-							.frm-error-wrapper {
-								padding: 0;
-								margin-bottom: 20px;
-								visibility: hidden;
+						}
+					}
+					.frm-error-wrapper {
+						padding: 0;
+						margin-bottom: 20px;
+						visibility: hidden;
 
-								@include phone {
-									display: none;
-								}
-								&.mobile {
-									display: none;
+						@include phone {
+							display: none !important;
+						}
+						&.mobile {
+							display: none;
 
-									@include phone {
-										display: block;
-									}
-								}
-								&.has-error {
-									visibility: visible;
-								}
-								.glyphicon-remove {
-									color: #ec0000;
-									top: 30px;
-									right: 15px;
-								}
-								.frm-error {
-									color: #ec0000;
-									font-weight: 600;
-									position: absolute;
+							@include phone {
+								display: block !important;
+							}
+						}
+						&.has-error {
+							visibility: visible;
+						}
+						.glyphicon-remove {
+							color: #ec0000;
+							top: 30px;
+							right: 15px;
+						}
+						.frm-error {
+							color: #ec0000;
+							font-weight: 600;
+							position: absolute;
 
-									@include phone {
-										bottom: 0;
-										left: 15px;
-									}
-								}
+							@include phone {
+								bottom: 0;
+								left: 15px;
 							}
 						}
 					}
