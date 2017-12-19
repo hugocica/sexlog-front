@@ -589,12 +589,25 @@ body {
 								&#card-code {
 									width: 65%;
 								}
+								&.has-error {
+									border: 2px solid #ec0000;
+								}
 							}
 							.frm-error-wrapper {
 								padding: 0;
 								margin-bottom: 20px;
 								visibility: hidden;
 
+								@include phone {
+									display: none;
+								}
+								&.mobile {
+									display: none;
+
+									@include phone {
+										display: block;
+									}
+								}
 								&.has-error {
 									visibility: visible;
 								}

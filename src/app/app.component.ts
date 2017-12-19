@@ -124,11 +124,13 @@ export class AppComponent {
             $('.expiration .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Validade inválida');
             $('.name .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
             $('.code .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Código inválido');
+            $('.frm-error-wrapper.mobile').removeClass('has-error').children('.frm-error').text('Campos contém erros. Corrija e tente novamente');
 
             // validação do número do cartão: testa caso o campo seja vazio e verifica se o número é válido (bem como operadora caso precise)
             if ( cardNumber.length == 0 ) {
                 msg.push("Esse campo não pode estar vazio");
                 $('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
+                $('.frm-error-wrapper.mobile').addClass('has-error').children('.frm-error').text('Campos contém erros. Corrija e tente novamente');
             } else if ( cardNumber.length > 16 || cardNumber[0] == 0 ) {
 
         		msg.push("Número de cartão inválido");
@@ -220,6 +222,7 @@ export class AppComponent {
         			validateFlag = true;
         		} else {
                     $('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Cartão inválido');
+                    $('.frm-error-wrapper.mobile').addClass('has-error').children('.frm-error').text('Campos contém erros. Corrija e tente novamente');
                     validateFlag = false;
         		}
         	}
@@ -232,6 +235,7 @@ export class AppComponent {
             if ( validadeAno == year || validadeMes.length == 0 || validadeAno.length == 0 ) {
                 if ( validadeMes < monthNumber ) {
                     $('.expiration .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Validade inválida');
+                    $('.frm-error-wrapper.mobile').addClass('has-error').children('.frm-error').text('Campos contém erros. Corrija e tente novamente');
                     validateFlag = false;
                 }
             } else {
@@ -241,6 +245,7 @@ export class AppComponent {
             // valida caso o nome esteja em branco
             if ( nomeTitular.length == 0 ) {
                 $('.name .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio');
+                $('.frm-error-wrapper.mobile').addClass('has-error').children('.frm-error').text('Campos contém erros. Corrija e tente novamente');
                 validateFlag = false;
             } else {
                 validateFlag = true;
@@ -249,6 +254,7 @@ export class AppComponent {
             // valida o código de segurança do cartão
             if ( cardCode.length == 0 || cardCode.length != 3 ) {
                 $('.code .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Código inválido');
+                $('.frm-error-wrapper.mobile').addClass('has-error').children('.frm-error').text('Campos em vermelho contém erros. Corrija e tente novamente');
                 validateFlag = false;
             } else {
                 validateFlag = true;
