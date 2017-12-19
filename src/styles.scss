@@ -247,7 +247,7 @@ body {
 								// border-bottom: 2px dotted #DCDCDC;
 
 								@include phone {
-									padding: 60px 0 70px;
+									padding: 45px 0;
 								}
 	                            .real-symbol {
 									color: #636363;
@@ -270,7 +270,7 @@ body {
 	                                line-height: 45px;
 
 									@include phone {
-										font-size: 120px;
+										font-size: 90px;
 									}
 	                                .moeda {
 	                                    line-height: 15px;
@@ -379,6 +379,7 @@ body {
 								@include phone {
 									max-width: calc(100% - 10px);
 									margin: 0 auto;
+									padding: 15px 20px;
 								}
 	                            &:not(:last-of-type) {
 	                                margin-bottom: 5px;
