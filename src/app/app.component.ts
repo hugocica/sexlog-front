@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+// declarando jQuery como global
 declare var $:any;
 
 @Component({
@@ -8,6 +9,7 @@ declare var $:any;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+    // variáveis globais usadas no data biding
     nextStep = true;
     btnFinish = false;
     planID = 0;
@@ -31,6 +33,7 @@ export class AppComponent {
     planDetails = '';
 
     constructor() {
+        // função inicial para coletar os dados do json quando a página carrega (informações dos planos)
         var dataJson;
 
         $.ajax({
@@ -111,6 +114,7 @@ export class AppComponent {
             this.nextStep = false;
             this.btnFinish = true;
         } else {
+            // verifica os campos do cartão, validando cada campo
             var validateFlag = false;
             var msg = Array();
         	var tipo = null;
@@ -120,6 +124,7 @@ export class AppComponent {
             var nomeTitular = $('#card-titular').val();
             var cardCode = $('#card-code').val();
 
+            // limpa os erros de cada campo, para que não sejam mostrados caso ocorra uma nova tentativa
             $('.number .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Cartão inválidox').parent().parent().removeClass('has-error');
             $('.expiration .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Validade inválida').parent().parent().removeClass('has-error');
             $('.name .frm-error-wrapper').removeClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio').parent().parent().removeClass('has-error');
@@ -131,7 +136,7 @@ export class AppComponent {
                 msg.push("Esse campo não pode estar vazio");
                 $('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text('Esse campo não pode estar vazio').parent().parent().addClass('has-error');
                 $('.frm-error-wrapper.mobile').addClass('has-error').children('.frm-error').text('Campos contém erros. Corrija e tente novamente');
-            } else if ( cardNumber.length > 16 || cardNumber[0] == 0 ) {
+            } else if ( cardNumber.length > 16 || cardNumber[0] == 0 || cardNumber.length < 16) {
 
         		msg.push("Número de cartão inválido");
 
@@ -215,7 +220,9 @@ export class AppComponent {
 
             if ( msg.length > 0 ) {
 
-            	console.log(msg);
+                $('.number .frm-error-wrapper').addClass('has-error').children('.frm-error').text(msg[0]).parent().parent().addClass('has-error');
+                $('.frm-error-wrapper.mobile').addClass('has-error').children('.frm-error').text('Campos contém erros. Corrija e tente novamente');
+                validateFlag = false;
 
             } else {
         		if( total % 10 == 0 ){
@@ -260,7 +267,7 @@ export class AppComponent {
                 validateFlag = true;
             }
 
-            if ( validateFlag ) {
+            if ( validateFlag && msg.length == 0 ) {
                 $('#payment-data, .plano-flow, .vipmodal-footer').slideUp();
                 $('#payment-end').slideDown();
 
